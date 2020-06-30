@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Login</title>
+  <title>Register</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -37,27 +37,28 @@
                     <h1 class="h4 text-gray-900 mb-4">Manajemen Keuangan</h1>
                     <hr>
                   </div>
-                  <form class="user" action="proses-login.php" method="post">
-                    <div class="form-group">
-                      <input type="text" name="username" class="form-control form-control-user" id="exampleInputUsername" placeholder="Username...">
-                    </div>
-                    <div class="form-group">
-                      <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password..">
-                    </div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Ingat akun</label>
-                      </div>
-                    </div>
-                    <input type="submit" name="submit" class="btn btn-primary btn-user btn-block" value="Masuk">
-                  </form>
-                  <br>
-                  <form class="user" action="register.php" method="post">
-                  <input type="submit" name="submit" class="btn btn-primary btn-user btn-block" value="Buat Akun">
-                  </form>
-                  <hr>
-                  <p align="center">&copy; Mantap Betul</p>
+                  <form class="user" action="proses-register.php" method="post">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+
+                <div class="form-group">
+                    <input type="gender" class="form-control" name="gender" placeholder="Male/Female">
+                </div>
+
+                <input type="submit" name="submit" class="btn btn-primary btn-user btn-block" value="Daftar">
+                
+                <div class="text-center forget">
+                    <p>Sudah punya<a href="./login.php"> akun...</a></p>
+                </div>
                 </div>
 
           </div>

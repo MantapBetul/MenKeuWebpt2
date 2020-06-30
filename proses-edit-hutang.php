@@ -3,14 +3,15 @@
 session_start();
 include('koneksi.php');
 
-$id = $_GET['id_hutang'];
-$jumlah = $_GET['jumlah'];
-$tgl = $_GET['tgl_hutang'];
-$alasan = $_GET['alasan'];
-$penghutang = $_GET['penghutang'];
+$id1 = $_GET['id1'];
+$status1 = $_GET['status1'];
+$jumlah1 = $_GET['jumlah1'];
+$nama1= $_GET['nama1'];
+$username1= $_GET['username1'];
+$tanggal1= $_GET['tanggal1'];
 
 //query update
-$query = mysqli_query($koneksi,"UPDATE hutang SET jumlah='$jumlah' , tgl_hutang='$tgl', alasan='$alasan', penghutang='$penghutang' WHERE id_hutang='$id' ");
+$query = mysqli_query($koneksi,"UPDATE transaksipiutang SET status1='$status1', jumlah1='$jumlah1', nama1='$nama1', username1='$username1', tanggal1='$tanggal1' WHERE id1='$id1' ");
 
  define('LOG','log.txt');
 function write_log($log){  
@@ -22,11 +23,11 @@ function write_log($log){
 }
 //jika benar
 
-$namaadmin = $_SESSION['nama'];
+$namaadmin = $_SESSION['nama1'];
 
 
 if ($query) {
-write_log("Nama Admin : ".$namaadmin." => Edit Hutang => ".$id." => Sukses ");
+write_log("Nama Admin : ".$namaadmin." => Edit Hutang => ".$id1." => Sukses ");
  # credirect ke page index
  header("location:hutang.php?pesan=berhasil_update"); 
 }

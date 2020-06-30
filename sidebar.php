@@ -34,31 +34,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="pendapatan.php">
           <i class="fas fa-fw fa-arrow-up"></i>
-          <span>Pemasukan</span>
-        </a>
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pengeluaran.php" >
-          <i class="fas fa-fw fa-arrow-down"></i>
-          <span>Pengeluaran</span>
-        </a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Karyawan
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="karyawan.php">
-          <i class="fas fa-fw fa-users"></i>
-          <span>Karyawan</span>
+          <span>Catatan Keuangan</span>
         </a>
       </li>
 	  
@@ -77,15 +53,11 @@
           <span>Utang-Piutang</span></a>
       </li>
 
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="laporan.php">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Laporan</span></a>
-      </li>
+     
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
+
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">

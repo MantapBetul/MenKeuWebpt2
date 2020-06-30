@@ -2,12 +2,14 @@
 //include('dbconnected.php');
 include('koneksi.php');
 
-$tgl_pemasukan = $_GET['tgl_pemasukan'];
+$status = $_GET['status'];
 $jumlah = $_GET['jumlah'];
-$sumber = $_GET['sumber'];
+$keterangan = $_GET['keterangan'];
+$username= $_GET['username'];
+$tanggal = $_GET['tanggal'];
 
 //query update
-$query = mysqli_query($koneksi,"INSERT INTO `pemasukan` (`tgl_pemasukan`, `jumlah`, `id_sumber`) VALUES ('$tgl_pemasukan', '$jumlah', '$sumber')");
+$query = mysqli_query($koneksi,"INSERT INTO `transaksikeuangan` (`status`, `jumlah`, `keterangan`, `username`, `tanggal`) VALUES ('$status', '$jumlah', '$keterangan', '$username', '$tanggal')");
 
 if ($query) {
  # credirect ke page index

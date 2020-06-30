@@ -2,14 +2,15 @@
 //include('dbconnected.php');
 include('koneksi.php');
 
-$jumlah = $_GET['jumlah'];
-$tgl_hutang = $_GET['tgl_hutang'];
-$penghutang = $_GET['penghutang'];
-$alasan = $_GET['alasan'];
 
+$status1 = $_GET['status1'];
+$jumlah1 = $_GET['jumlah1'];
+$nama1= $_GET['nama1'];
+$username1= $_GET['username1'];
+$tanggal1= $_GET['tanggal1'];
 
 //query update
-$query = mysqli_query($koneksi,"INSERT INTO `hutang` (`jumlah`, `tgl_hutang`, `alasan`, `penghutang`) VALUES ('$jumlah', '$tgl_hutang', '$alasan','$penghutang')");
+$query = mysqli_query($koneksi,"INSERT INTO `transaksipiutang` (`status1`, `jumlah1`, `nama1`, `username1`, `tanggal1`) VALUES ('$status1', '$jumlah1','$nama1', '$username1', '$tanggal1')");
 
 if ($query) {
  # credirect ke page index

@@ -2,10 +2,10 @@
 //include('dbconnected.php');
 include('koneksi.php');
 
-$id = $_GET['id_hutang'];
+$id1 = $_GET['id1'];
 
 //query update
-$query = mysqli_query($koneksi,"DELETE FROM `hutang` WHERE id_hutang = '$id'");
+$query = mysqli_query($koneksi,"DELETE FROM `transaksipiutang` WHERE id1 = '$id1'");
 
 if ($query) {
  # credirect ke page index

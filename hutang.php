@@ -12,7 +12,7 @@ require 'cek-sesi.php';
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Kelola Hutang</title>
+  <title>Transaksi Utang-Piutang</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -29,44 +29,28 @@ require 'cek-sesi.php';
 require 'koneksi.php';
 require 'sidebar.php'; 
 
-$pendapatan = mysqli_query($koneksi, "SELECT id_pemasukan FROM pemasukan");
-$pendapatan = mysqli_num_rows($pendapatan);
+$user     = $_SESSION['username'];
 
-$pengeluaran = mysqli_query($koneksi, "SELECT id_pengeluaran FROM pengeluaran");
-$pengeluaran = mysqli_num_rows($pengeluaran);
+$piutang_hari_ini = mysqli_query($koneksi, "SELECT (SELECT SUM(jumlah1) FROM transaksipiutang where username1='$user' AND status1='PIUTANG') AS PIUTANG");
+$piutang_hari_ini = mysqli_fetch_array($piutang_hari_ini);
 
-$sekarang =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE()");
-$sekarang = mysqli_fetch_array($sekarang);
-
-$satuhari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 1 DAY");
-$satuhari= mysqli_fetch_array($satuhari);
+$hutang_hari_ini = mysqli_query($koneksi, "SELECT (SELECT SUM(jumlah1) FROM transaksipiutang where username1='$user' AND status1='HUTANG') AS HUTANG");
+$hutang_hari_ini = mysqli_fetch_array($hutang_hari_ini);
 
 
-$duahari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 2 DAY");
-$duahari= mysqli_fetch_array($duahari);
+$pepiutang=mysqli_query($koneksi,"SELECT * FROM transaksipiutang where username1='$user' AND status1='PIUTANG'");
+while ($piutang=mysqli_fetch_array($pepiutang)){
+$arraypiutang[] = $piutang['jumlah1'];
+}
+$jumlahpiutang = array_sum($arraypiutang);
 
-$tigahari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 3 DAY");
-$tigahari= mysqli_fetch_array($tigahari);
+$pehutang=mysqli_query($koneksi,"SELECT * FROM transaksipiutang where username1='$user' AND status1='HUTANG'");
+while ($hutang=mysqli_fetch_array($pehutang)){
+$arrayhutang[] = $hutang['jumlah1'];
+}
+$jumlahhutang = array_sum($arrayhutang);
 
-$empathari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 4 DAY");
-$empathari= mysqli_fetch_array($empathari);
-
-$limahari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 5 DAY");
-$limahari= mysqli_fetch_array($limahari);
-
-$enamhari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 6 DAY");
-$enamhari= mysqli_fetch_array($enamhari);
-
-$tujuhhari =mysqli_query($koneksi, "SELECT jumlah FROM hutang
-WHERE tgl_hutang = CURDATE() - INTERVAL 7 DAY");
-$tujuhhari= mysqli_fetch_array($tujuhhari);
+$aset = $jumlahpiutang - $jumlahhutang;
 
 ?>
 
@@ -77,127 +61,117 @@ $tujuhhari= mysqli_fetch_array($tujuhhari);
   
         <!-- Begin Page Content -->
         <div class="container-fluid">
+        <!-- Content Row -->
+        <div class="row">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Grafik Hutang</h1>
-<button type="button" class="btn btn-success" style="margin:5px" data-toggle="modal" data-target="#myModalTambah"><i class="fa fa-plus"> Hutang</i></button><br>
-          <!-- Content Row -->
-          <div class="row">
+<!-- Earnings (Monthly) Card Example -->
+<div class="col-xl-3 col-md-6 mb-4">
+  <div class="card border-left-success shadow h-100 py-2">
+    <div class="card-body">
+      <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+          <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Piutang</div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?=number_format($piutang_hari_ini['0'],2,',','.');?></div>
+        </div>
+        <div class="col-auto">
+          <i class="fas fa-calendar fa-2x text-gray-300"></i>
+        </div>
+      </div>
+    </div> 
+</div>
+</div>
 
-            <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Hutang Minggu Ini</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
+<!-- Earnings (Monthly) Card Example -->
+<div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Hutang</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.<?=number_format($hutang_hari_ini['0'],2,',','.');?></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                  </div>
-                </div>
+                </div> 
               </div>
             </div>
 
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Perbandingan</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Aset</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Rp.<?=number_format($aset,2,',','.');?></div>
+                        </div>   
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                     </div>
                   </div>
-                </div>
-             
-			 <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Pendapatan
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-danger"></i> Pengeluaran
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
+</div>
+
+
+          <!-- Page Heading -->
+          
+<button type="button" class="btn btn-success" style="margin:5px" data-toggle="modal" data-target="#myModalTambah"><i class="fa fa-plus"> Tambah Transaksi Utang-Piutang</i></button><br>
+
+          
+          <!-- Content Row -->
+          <div class="row">
 		  
 		            <!-- DataTales Example -->
+                <div class="col-xl-11 col-lg-7">
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Daftar Hutang</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Daftar Utang-Piutang</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-					<th>No.urut</th>
+					            <th>ID</th>
+                      <th>Status</th>
                       <th>Jumlah</th>
+                      <th>Nama</th>
+                      <th>Username</th>
                       <th>Tanggal</th>
-                      <th>Alasan</th>
-                      <th>Penghutang</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-					<th>No.urut</th>
-                      <th>Jumlah</th>
-                      <th>Tanggal</th>
-                      <th>Alasan</th>
-                      <th>Penghutang</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
-				  <?php 
-$query = mysqli_query($koneksi,"SELECT * FROM hutang where jumlah > 1000 ORDER BY tgl_hutang DESC");
+<?php 
+$user    = $_SESSION['username'];
+$query = mysqli_query($koneksi,"SELECT * FROM transaksipiutang WHERE username1='$user' ORDER BY id1 ASC");
 $no = 1;
 while ($data = mysqli_fetch_assoc($query)) 
-{
+{ $tanggal1    = date_format(date_create($data['tanggal1']), "Y/m/d");
 ?>
                     <tr>
-					<td><?=$no++?></td>
-                      <td><?=$data['jumlah']?></td>
-                      <td><?=$data['tgl_hutang']?></td>
-                      <td><?=$data['alasan']?></td>
-                      <td><?=$data['penghutang']?></td>
+					            <td><?=$no++?></td>
+                      <td><?=$data['status1']?></td>
+                      <td><?=$data['jumlah1']?></td>
+                      <td><?=$data['nama1']?></td>
+                      <td><?=$data['username1']?></td>
+                      <td><?=$data['tanggal1']?></td>
 					  <td>
                     <!-- Button untuk modal -->
-<a href="#" type="button" class=" fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#myModal<?php echo $data['id_hutang']; ?>"></a>
+<a href="#" type="button" class=" fa fa-edit btn btn-primary btn-md" data-toggle="modal" data-target="#myModal<?php echo $data['id1']; ?>"></a>
 </td>
 </tr>
 <!-- Modal Edit Mahasiswa-->
-<div class="modal fade" id="myModal<?php echo $data['id_hutang']; ?>" role="dialog">
+<div class="modal fade" id="myModal<?php echo $data['id1']; ?>" role="dialog">
 <div class="modal-dialog">
 
 <!-- Modal content-->
@@ -210,38 +184,47 @@ while ($data = mysqli_fetch_assoc($query))
 <form role="form" action="proses-edit-hutang.php" method="get">
 
 <?php
-$id = $data['id_hutang']; 
-$query_edit = mysqli_query($koneksi,"SELECT * FROM hutang WHERE id_hutang='$id'");
+$id1 = $data['id1']; 
+$query_edit = mysqli_query($koneksi,"SELECT * FROM transaksipiutang WHERE id1='$id1'");
 //$result = mysqli_query($conn, $query);
 while ($row = mysqli_fetch_array($query_edit)) {  
 ?>
 
 
-<input type="hidden" name="id_hutang" value="<?php echo $row['id_hutang']; ?>">
+<input type="hidden" name="id1" value="<?php echo $row['id1']; ?>">
+
+
+<div class="form-group">
+<label>Status</label>
+<select class="form-control" name="status1">
+<option value="PIUTANG" <?php if($data=="PIUTANG"){echo "selected";} ?>  >PIUTANG</option>
+<option value="HUTANG" <?php if($data=="HUTANG"){echo "selected";} ?>  >HUTANG</option>
+</select>
+</div>
 
 <div class="form-group">
 <label>Jumlah</label>
-<input type="text" name="jumlah" class="form-control" value="<?php echo $row['jumlah']; ?>">      
+<input type="number" name="jumlah1" class="form-control" value="<?php echo $row['jumlah1']; ?>">      
+</div>
+
+<div class="form-group">
+<label>Nama</label>
+<input type="text" name="nama1" class="form-control" value="<?php echo $row['nama1']; ?>">      
+</div>
+
+<div class="form-group">
+<label>Username</label>
+<input type="text" name="username1" class="form-control" value="<?php echo $row['username1']; ?>">      
 </div>
 
 <div class="form-group">
 <label>Tanggal</label>
-<input type="date" name="tgl_hutang" class="form-control" value="<?php echo $row['tgl_hutang']; ?>">      
-</div>
-
-<div class="form-group">
-<label>Alasan</label>
-<input type="text" name="alasan" class="form-control" value="<?php echo $row['alasan']; ?>">      
-</div>
-
-<div class="form-group">
-<label>Penghutang</label>
-<input type="text" name="penghutang" class="form-control" value="<?php echo $row['penghutang']; ?>">      
+<input type="date" name="tanggal1" class="form-control" value="<?php echo $row['tanggal1']; ?>">      
 </div>
 
 <div class="modal-footer">  
 <button type="submit" class="btn btn-success">Ubah</button>
-<a href="hapus-hutang.php?id_hutang=<?=$row['id_hutang'];?>" Onclick="confirm('Anda Yakin Ingin Menghapus?')" class="btn btn-danger">Hapus</a>
+<a href="hapus-hutang.php?id1=<?=$row['id1'];?>" Onclick="confirm('Anda Yakin Ingin Menghapus?')" class="btn btn-danger">Hapus</a>
 <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
 </div>
 <?php 
@@ -266,20 +249,27 @@ while ($row = mysqli_fetch_array($query_edit)) {
       <div class="modal-content">
         <!-- heading modal -->
         <div class="modal-header">
-          <h4 class="modal-title">Tambah Hutang</h4>
+          <h4 class="modal-title">Tambah Catatan</h4>
 		    <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- body modal -->
 		<form action="tambah-hutang.php" method="get">
         <div class="modal-body">
+		ID : 
+         <input type="text" class="form-control" name="id">
+    Status : 
+         <select class="form-control" name="status1">
+		 <option value="PIUTANG" >PIUTANG</option>
+		 <option value="HUTANG" >HUTANG</option>
+		 </select>
 		Jumlah : 
-         <input type="text" class="form-control" name="jumlah">
-		Tanggal : 
-         <input type="date" class="form-control" name="tgl_hutang">
-		 Penghutang : 
-         <input type="text" class="form-control" name="penghutang">
-		Alasan : 
-         <input type="text" class="form-control" name="alasan">
+         <input type="number" class="form-control" name="jumlah1">
+		Nama: 
+         <input type="text" class="form-control" name="nama1">
+		Username : 
+         <input type="text" class="form-control" name="username1"> 
+    Tanggal : 
+         <input type="date" class="form-control" name="tanggal1">   
         </div>
         <!-- footer modal -->
         <div class="modal-footer">
