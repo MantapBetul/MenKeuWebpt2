@@ -48,12 +48,29 @@ if ($_SESSION['id'] == 1) {
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
+<<<<<<< HEAD
             
 <<<<<<< HEAD
         <p><p>Manajemen Keuangan adalah sebuah sistem untuk mengatur dan mengelola keuangan dengan mencatat
         pemasukan dan pengeluaran, serta hutang-piutang dari pengguna. Manajemen Keuangan dibangun dengan
         desain tampilan yang user-friendly untuk memudahkan pengguna supaya bisa mengatur dan mengelola keuangannya
         dengan cara yang lebih terstruktur, namun tetap dinamis.  </p> </p>
+=======
+                
+        <p align = justify>
+        Keuangan adalah sesuatu yang sangat sulit untuk diatur. Kebanyakan orang sering merasa kesulitan untuk mengatur
+        keuangannya dengan baik dan terstruktur. Kesulitan tersebut juga sering dialami mahasiswa, di mana kebanyakan
+        dari pelajar dan mahasiswa yang baru belajar mengatur keuangannya sendiri. Tak hanya pelajar dan mahasiswa, banyak
+        pekerja yang terlalu sibuk dengan pekerjaannya hingga merasa kerepotan untuk mengatur keuangan. Nah, dari masalah 
+        tersebut terciptalah ide untuk memberi kemudahan untuk mengatur keuangan dengan baik.
+       </p>
+        <p align = justify>
+        Manajemen Keuangan adalah sebuah sistem yang dirancang oleh anggota kelompok Mantap Betul
+        yang beranggotakan 4 orang. Sistem ini dirancang untuk mengatur dan mengelola keuangan
+        dengan mencatat pemasukan dan pengeluaran, serta hutang-piutang dari pengguna. Manajemen Keuangan dibangun
+        dengan desain tampilan yang user-friendly untuk memudahkan pengguna supaya bisa mengatur dan mengelola
+        keuangannya dengan cara yang lebih terstruktur, namun tetap dinamis.  </p>
+>>>>>>> 00cd709cf0899b04bbaf2dd542eb3bc299daa4aa
         <br>
         <br>
         <br>
@@ -65,6 +82,7 @@ if ($_SESSION['id'] == 1) {
         <br>
         <br>
         <br>
+<<<<<<< HEAD
         <br>
 =======
         <p>Manajemen Keuangan adalah sebuah sistem untuk mengatur dan mengelola keuangan dengan mencatat
@@ -73,6 +91,8 @@ if ($_SESSION['id'] == 1) {
         dengan cara yang lebih terstruktur, namun tetap dinamis.  </p>
 		  
 >>>>>>> 532ec182a89bd3d234ae3e479e77e3e58fe41d56
+=======
+>>>>>>> 00cd709cf0899b04bbaf2dd542eb3bc299daa4aa
 
         </div>
         <!-- /.container-fluid -->

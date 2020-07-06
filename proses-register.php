@@ -8,8 +8,12 @@ if (isset($_POST['username']) && $_POST['username']) {
     $email= $_POST['email'];
     $password = $_POST['password'];
     $gender = $_POST['gender'];
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> 00cd709cf0899b04bbaf2dd542eb3bc299daa4aa
     // SQL Insert
     $sql = "INSERT INTO users (username, email, password, gender) VALUES ('$username', '$email', '$password', '$gender')";
 

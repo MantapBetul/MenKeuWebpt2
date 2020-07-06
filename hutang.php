@@ -47,11 +47,19 @@ $jumlahpiutang = array_sum($arraypiutang);
 $pehutang=mysqli_query($koneksi,"SELECT * FROM transaksipiutang where username1='$user' AND status1='HUTANG'");
 while ($hutang=mysqli_fetch_array($pehutang)){
 $arrayhutang[] = $hutang['jumlah1'];
+<<<<<<< HEAD
 }
 $jumlahhutang = array_sum($arrayhutang);
 
 $aset = $jumlahpiutang - $jumlahhutang;
 
+=======
+$jumlahhutang = array_sum($arrayhutang);
+}
+$aset = $jumlahpiutang - $jumlahhutang;
+
+
+>>>>>>> 00cd709cf0899b04bbaf2dd542eb3bc299daa4aa
 ?>
 
       <!-- Main Content -->

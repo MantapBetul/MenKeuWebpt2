@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 00cd709cf0899b04bbaf2dd542eb3bc299daa4aa
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,3 +85,7 @@
 </body>
 
 </html>
+<<<<<<< HEAD
+=======
+>>>>>>> 532ec182a89bd3d234ae3e479e77e3e58fe41d56
+>>>>>>> 00cd709cf0899b04bbaf2dd542eb3bc299daa4aa

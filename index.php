@@ -42,17 +42,32 @@ $pemasukan_hari_ini = mysqli_fetch_array($pemasukan_hari_ini);
 $pemasukan=mysqli_query($koneksi,"SELECT * FROM transaksikeuangan where username='$username' AND status='MASUK'");
 while ($masuk=mysqli_fetch_array($pemasukan)){
 $arraymasuk[] = $masuk['jumlah'];
+<<<<<<< HEAD
 }
 $jumlahmasuk = array_sum($arraymasuk);
+=======
+$jumlahmasuk = array_sum($arraymasuk);
+}
+
+>>>>>>> 00cd709cf0899b04bbaf2dd542eb3bc299daa4aa
 
 
 $pengeluaran=mysqli_query($koneksi,"SELECT * FROM transaksikeuangan where username='$username' AND status='KELUAR'");
 while ($keluar=mysqli_fetch_array($pengeluaran)){
 $arraykeluar[] = $keluar['jumlah'];
+<<<<<<< HEAD
 }
 $jumlahkeluar = array_sum($arraykeluar);
 
 $uang = $jumlahmasuk - $jumlahkeluar;
+=======
+$jumlahkeluar = array_sum($arraykeluar);
+$uang = $jumlahmasuk - $jumlahkeluar;
+}
+
+
+
+>>>>>>> 00cd709cf0899b04bbaf2dd542eb3bc299daa4aa
 
 //untuk data chart area
 
